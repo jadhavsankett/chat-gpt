@@ -4,7 +4,9 @@ const jwt = require('jsonwebtoken')
 const userModel = require('../models/user.model')
 const aiService = require('../services/ai.service')
 const messageModel = require('../models/message.model')
-const {createMomory , queryMemory } = require('../services/vector.service')
+const {createMomory , queryMemory } = require('../services/vector.service');
+const { chat } = require("@pinecone-database/pinecone/dist/assistant/data/chat");
+const generateVector = require("../services/ai.service");
 
 async function initSocketServer(httpServer) {
   const io = new Server(httpServer, {});
@@ -40,14 +42,36 @@ async function initSocketServer(httpServer) {
 
        console.log(messagePayload)
 
-       await messageModel.create({
+       /* input massage */
+      const message = await messageModel.create({
         chat: messagePayload.chat,
         user: socket.user._id,
         content: messagePayload.content,
         role: 'user'
        })
 
-       
+      const vectors = await aiService.generateVector(messagePayload.content)
+
+         const memory = await queryMemory({
+       queryVectors:vectors,
+      limit:3,
+      metadata:{}
+     })
+
+     await createMomory({
+        vectors,
+        messageId: message._id,
+        metadata:{
+          chat:messagePayload.chat,
+          user:socket.user._id,
+          text:messagePayload.content
+        }
+     })
+
+  
+
+     console.log(memory)
+
 
        /* sort term memory */
        const chatHistory = (await messageModel.find({
@@ -62,11 +86,25 @@ async function initSocketServer(httpServer) {
         }
        }))
 
-       await messageModel.create({
+       /* out-put massage */
+      const responseMessage = await messageModel.create({
         chat: messagePayload.chat,
         user: socket.user._id,
         content: response,
         role: 'model'
+       })
+
+
+       const responseVectors = await aiService.generateVector(response)
+
+       await createMomory({
+        vectors:responseVectors,
+        messageId:responseMessage._id,
+        metadata:{
+          chat:messagePayload.chat,
+          user:socket.user._id,
+          text:response
+        }
        })
 
        socket.emit('ai-response',{
