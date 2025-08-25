@@ -34,6 +34,7 @@ async function initSocketServer(httpServer) {
     }
   });
 
+  
   io.on("connection", (socket) => {
     socket.on("ai-message", async (messagePayload) => {
       // console.log(messagePayload);
@@ -100,18 +101,6 @@ async function initSocketServer(httpServer) {
 
       const response = await aiService.generateResponse([...ltm, ...stm]);
 
-      /* 
-      //out-put massage
-      const responseMessage = await messageModel.create({
-        chat: messagePayload.chat,
-        user: socket.user._id,
-        content: response,
-        role: "model",
-      });
-
-      const responseVectors = await aiService.generateVector(response);
-
-       */
 
       socket.emit("ai-response", {
         content: response,
