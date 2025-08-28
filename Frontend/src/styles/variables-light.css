@@ -1,0 +1,13 @@
+/* Light theme variables - imported into forms and app styles */
+:root[data-theme='light'] {
+	--bg: #f6f7fb;
+	--card-bg: #ffffff;
+	--text: #0f1724;
+	--muted: #6b7280;
+	--primary: #2563eb; /* blue-600 */
+	--primary-contrast: #ffffff;
+	--input-bg: #ffffff;
+	--input-border: #d1d5db;
+	--shadow: 0 6px 18px rgba(15, 23, 36, 0.06);
+	--radius: 12px;
+}

@@ -1,0 +1,13 @@
+/* Dark theme variables - imported into forms and app styles */
+:root[data-theme='dark'] {
+	--bg: #0b1220;
+	--card-bg: #071029;
+	--text: #e6eef8;
+	--muted: #94a3b8;
+	--primary: #60a5fa; /* blue-400 */
+	--primary-contrast: #06203a;
+	--input-bg: #071229;
+	--input-border: #133049;
+	--shadow: 0 8px 30px rgba(2,6,23,0.6);
+	--radius: 12px;
+}
