@@ -32,14 +32,13 @@ const Register = () => {
   async function onSubmit(e) {
     e.preventDefault();
 
-    // Prevent submitting empty values
     if (!form.email || !form.firstName || !form.lastName || !form.password) {
       alert("Please fill out all required fields.");
       return;
     }
 
     setSubmitting(true);
-    console.log("Submitting form:", form);
+    // submitting...
 
     axios.post("http://localhost:3000/api/auth/register", {
       email: form.email,
@@ -51,22 +50,21 @@ const Register = () => {
     }, {
       withCredentials: true
     })
-    .then((res) => {
-      console.log("Registration success:", res.data);
-      navigate('/');
-    })
-    .catch((err) => {
-      if (err.response) {
-        console.error("Server error:", err.response.data);
-        alert(`Registration failed: ${err.response.data.message || "Please check your input."}`);
-      } else {
-        console.error("Error:", err);
-        alert("Registration failed: No server response.");
-      }
-    })
-    .finally(() => {
-      setSubmitting(false);
-    });
+      .then((res) => {
+        navigate('/');
+      })
+      .catch((err) => {
+        if (err.response) {
+          console.error("Server error:", err.response.data);
+          alert(`Registration failed: ${err.response.data.message || "Please check your input."}`);
+        } else {
+          console.error("Error:", err);
+          alert("Registration failed: No server response.");
+        }
+      })
+      .finally(() => {
+        setSubmitting(false);
+      });
   }
 
   return (
@@ -81,54 +79,54 @@ const Register = () => {
           <div className="row">
             <label className="field">
               <span className="label-text">First name</span>
-              <input 
-                className="input" 
-                type="text" 
+              <input
+                className="input"
+                type="text"
                 name="firstName"
-                required 
-                value={form.firstName} 
-                onChange={handleChange} 
-                placeholder="First" 
+                required
+                value={form.firstName}
+                onChange={handleChange}
+                placeholder="First"
               />
             </label>
 
             <label className="field">
               <span className="label-text">Last name</span>
-              <input 
-                className="input" 
-                type="text" 
+              <input
+                className="input"
+                type="text"
                 name="lastName"
-                required 
-                value={form.lastName} 
-                onChange={handleChange} 
-                placeholder="Last" 
+                required
+                value={form.lastName}
+                onChange={handleChange}
+                placeholder="Last"
               />
             </label>
           </div>
 
           <label className="field">
             <span className="label-text">Email</span>
-            <input 
-              className="input" 
-              type="email" 
+            <input
+              className="input"
+              type="email"
               name="email"
-              required 
-              value={form.email} 
-              onChange={handleChange} 
-              placeholder="you@example.com" 
+              required
+              value={form.email}
+              onChange={handleChange}
+              placeholder="you@example.com"
             />
           </label>
 
           <label className="field">
             <span className="label-text">Password</span>
-            <input 
-              className="input" 
-              type="password" 
+            <input
+              className="input"
+              type="password"
               name="password"
-              required 
-              value={form.password} 
-              onChange={handleChange} 
-              placeholder="Choose a strong password" 
+              required
+              value={form.password}
+              onChange={handleChange}
+              placeholder="Choose a strong password"
             />
           </label>
 

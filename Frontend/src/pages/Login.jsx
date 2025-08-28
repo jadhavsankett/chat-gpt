@@ -43,7 +43,6 @@ const Login = () => {
     )
     .then((res) => {
       navigate('/');
-      console.log(res);
     })
     .catch((err) => {
       console.error(err);
