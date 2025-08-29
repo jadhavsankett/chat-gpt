@@ -32,7 +32,8 @@ const Login = () => {
   async function onSubmit(e) {
     e.preventDefault();
     setSubmitting(true);
-
+    
+    // Start the login process
     axios.post(
       "https://chat-gpt-h08n.onrender.com/api/auth/login",
       {
