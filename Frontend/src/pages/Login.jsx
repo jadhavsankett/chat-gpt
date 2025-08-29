@@ -34,7 +34,7 @@ const Login = () => {
     setSubmitting(true);
 
     axios.post(
-      "http://localhost:3000/api/auth/login",
+      "https://chat-gpt-h08n.onrender.com/api/auth/login",
       {
         email: form.email,
         password: form.password
