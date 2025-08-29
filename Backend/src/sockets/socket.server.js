@@ -11,7 +11,15 @@ const {
 const generateVector = require("../services/ai.service");
 
 async function initSocketServer(httpServer) {
-  const io = new Server(httpServer, {});
+  const io = new Server(httpServer, {
+    cors: {
+      origin: "http://localhost:5173", // frontend URL
+      methods: ["GET", "POST"],
+      allowedHeaders: ["content-type", "authorization"],
+      credentials: true
+    }
+  });
+
 
   /* socket io middleware */
   io.use(async (socket, next) => {
@@ -36,6 +44,7 @@ async function initSocketServer(httpServer) {
 
   
   io.on("connection", (socket) => {
+
     socket.on("ai-message", async (messagePayload) => {
       // console.log(messagePayload);
 

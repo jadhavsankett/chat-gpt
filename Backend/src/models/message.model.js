@@ -11,7 +11,7 @@ const messageSchema = new mongoose.Schema({
   },
   content:{
     type:String,
-    required:true
+    required:true,  //last stop here 
   },
   role:{
     type:String,

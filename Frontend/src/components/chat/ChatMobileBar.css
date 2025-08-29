@@ -59,3 +59,10 @@
     .chat-icon-btn { width:36px; height:36px; border-radius:8px; }
     .chat-app-title { font-size: 0.98rem; }
 }
+
+@media (max-width: 959px) {
+    .chat-sidebar {
+        top: 52px; /* offset below mobile top bar */
+        height: calc(100% - 52px); /* ensure it fits within remaining space */
+    }
+}
