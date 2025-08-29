@@ -43,7 +43,7 @@ const Home = () => {
     if (title) title = title.trim();
     if (!title) return
 
-    const response = await axios.post("http://localhost:3000/api/chat", {
+    const response = await axios.post("https://chat-gpt-h08n.onrender.com/api/chat", {
       title
     }, {
       withCredentials: true
@@ -60,12 +60,12 @@ const Home = () => {
   // Ensure at least one chat exists initially
   useEffect(() => {
 
-    axios.get("http://localhost:3000/api/chat", { withCredentials: true })
+    axios.get("https://chat-gpt-h08n.onrender.com/api/chat", { withCredentials: true })
       .then(response => {
         dispatch(setChats(response.data.chats.reverse()));
       });
 
-    const tempSocket = io("http://localhost:3000", {
+    const tempSocket = io("https://chat-gpt-h08n.onrender.com", {
       withCredentials: true,
       transports: ["websocket", "polling"]
     });
@@ -113,7 +113,7 @@ const Home = () => {
   }
 
   const getMessages = async (chatId) => {
-    const response = await axios.get(`http://localhost:3000/api/chat/messages/${chatId}`, { withCredentials: true })
+    const response = await axios.get(`https://chat-gpt-h08n.onrender.com/api/chat/messages/${chatId}`, { withCredentials: true })
     
     // console.log('fetched message',response.data.messages)
 
