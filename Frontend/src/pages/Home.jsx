@@ -48,12 +48,15 @@ const Home = () => {
     }, {
       withCredentials: true
     })
-    getMessages(response.data.chat._id)
+    // getMessages(response.data.chat._id)
 
-    dispatch(startNewChat({
-      title: response.data.chat.title,
-      _id: response.data.chat._id
-    }));
+    // dispatch(startNewChat({
+    //   title: response.data.chat.title,
+    //   _id: response.data.chat._id
+    // }));
+    // setSidebarOpen(false);
+     getMessages(response.data.chat._id);
+    dispatch(startNewChat(response.data.chat));
     setSidebarOpen(false);
   }
 
@@ -122,7 +125,7 @@ const Home = () => {
       content: m.content
     })))
   }
-
+  
 //added the same changes here 
 
   return (
