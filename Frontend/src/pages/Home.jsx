@@ -123,6 +123,8 @@ const Home = () => {
     })))
   }
 
+//added the same changes here 
+
   return (
     <div className="chat-layout minimal">
       <ChatMobileBar
